@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="reverse-button" id="btn">Нажми меня!</button>
+    <button class="reverse-button" id="btn">Услышь мой рёв!</button>
+    <script>
+        // const reverseButton1 = {
+        //     firstText: "Нажми меня!",
+        //     secondText: "Выпей меня",
+        //     handleClick({target}){
+        //         const {textContent} = target;
+        //         const {firstText, secondText} = this;
+        //         const newTextContent = (textContent === firstText) ? secondText : firstText;
+        //         target.textContent = newTextContent;
+        //     }
+        // };
+
+        // const reverseButton2 = {
+        //     firstText: "Услышь мой рёв!",
+        //     secondText: "Ланнистеры всегда платят свои долги",
+        //     handleClick({target}){
+        //         const {textContent} = target;
+        //         const {firstText, secondText} = this;
+        //         const newTextContent = (textContent === firstText) ? secondText : firstText;
+        //         target.textContent = newTextContent;
+        //     }
+        // }
+
+        class ReverseButton {
+            constructor({firstText, secondText}){
+                this.firstText = firstText;
+                this.secondText = secondText;
+                // this.handleClick = this.handleClick.bind(this);
+                // console.log(this);
+                // this.handleClick = ({target}) => {
+                //     const {textContent} = target;
+                //     console.log(this);
+                //     const {firstText, secondText} = this;
+                //     const newTextContent = (textContent === firstText) ? secondText : firstText;
+                //     target.textContent = newTextContent;
+                // }
+            }
+
+            handleClick = ({target}) => {
+                const {textContent} = target;
+                // console.log(this);
+                const {firstText, secondText} = this;
+                const newTextContent = (textContent === firstText) ? secondText : firstText;
+                target.textContent = newTextContent;
+            }
+
+            // handleClick({target}){
+            //     const {textContent} = target;
+            //     console.log(this);
+            //     const {firstText, secondText} = this;
+            //     const newTextContent = (textContent === firstText) ? secondText : firstText;
+            //     target.textContent = newTextContent;
+            // }
+        }
+
+        const button1 = document.getElementById("btn");
+        const reverseButton1Props = {
+            firstText: "Нажми меня!", 
+            secondText: "Съешь меня!"
+        }
+        const reverseButton1 = new ReverseButton(reverseButton1Props);
+        console.log(reverseButton1);
+        button1.addEventListener("click", reverseButton1.handleClick);
+    </script>
+</body>
+</html>

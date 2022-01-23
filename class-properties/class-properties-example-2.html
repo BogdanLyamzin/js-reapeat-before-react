@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .activeBtn {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <button class="reverse-button" id="btn">Нажми меня!</button>
+    <script>
+        class Button {
+            constructor(name){
+                this.name = name;
+            }
+        }
+
+        class ReverseButton extends Button {
+            // constructor(name){
+            //     super(name);
+            //     this.active = false;
+            // }
+            
+            active = false;
+
+            handleClick = ({target})=> {
+                // target.insertAdjacentHTML("afterend", "<p>Текст  после кнопки</p>")
+                const {active} = this;
+                if(active){
+                    target.classList.remove("activeBtn");
+                }
+                else {
+                    target.classList.add("activeBtn");
+                }
+                this.active = !active;
+            }
+        }
+
+        const button = document.getElementById("btn");
+        const reverseButton = new ReverseButton("button");
+        console.log(reverseButton)
+        button.addEventListener("click", reverseButton.handleClick);
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Нажми меня</button>
+    <script>
+        /*
+        this стрелочных функций определается в момент создания и является 
+        неизменным в процессе работы, то есть стрелочную функцию нельзя никому
+        одолжить.
+        this стрелочной функции равен this функции-родителя (функции, в которой
+        она была создана).
+
+        1. this стрелочной функции, созданной в общем потоке, равен 
+        window.
+
+        2. this стрелочной функции, созданной в методе объекта, равен 
+        этому объекту.
+        */
+
+        const calc = (foot, inch) => {
+            const result = (foot * 12 + inch) * 2.54;
+            console.log(this);
+            return result;
+        }
+
+        calc();
+
+        const button = document.getElementById("btn");
+        button.addEventListener("click", calc);
+
+        const user = {
+            name: "Алекс",
+            lastName: "Гийом-Василь",
+            getAge: ()=> {
+                console.log(this)
+            },
+            getFullName(){
+                const fullName = `${this.name} ${this.lastName}`;
+                // console.log(this);
+                const func = ()=> {
+                    console.log(this);
+                }
+                return func;
+            }
+        }
+
+        const newFunc = user.getFullName();
+        // console.log(newFunc)
+        // newFunc()
+        // button.addEventListener("click", newFunc);
+        // setTimeout(newFunc, 2000)
+        
+    </script>
+</body>
+</html>

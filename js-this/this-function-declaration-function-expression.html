@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">Нажми меня</button>
+    <script>
+        /*
+        This для Function Expression и Function Declaration.
+
+        1. This - это всегда ссылка на объект. 
+
+        2. This при вызове обычной функции (function Expression или function Declaration)
+        равен объекту, которому функция ПРИНАДЛЕЖИТ в момент вызова. 
+        This равен хозяину функции в момент вызова.
+
+        3. Хозяин присваивается функции в момент создания, но может быть
+        изменен в момент вызова (функция временно одалживается другому объекту).
+
+        4. Функция, объявленная в общем потоке, принадлежит window. 
+
+        5. This функции-обработчика события равен DOM-элементу, к которому
+        привязано событие. 
+        (Функция временно одалживается DOM-элементу).
+
+        6. This функции - первого аргумента setTimeout и setIterval равен 
+        window в момент вызова 
+        (Функция временно одалживается window).
+
+        7. .bind(object) прибивает значение this гвоздями - оно становится 
+        равным объекту, указаному в аргументе bind.
+
+        8. .call(object) одалживает функцию object в момент вызова
+        (this === object).
+        */
+
+        function calc(foot, inch){
+            const result = (foot * 12 + inch) * 2.54;
+            console.log(this);
+            return result;
+        }
+
+        calc();
+
+        const user = {
+            name: "Алекс",
+            lastName: "Гийом-Василь",
+            getFullName(){
+                const fullName = `${this.name} ${this.lastName}`;
+                // calc();
+                console.log(this);
+                return;
+            }
+        }
+
+        // user.getFullName();
+
+        const button = document.getElementById("btn");
+        // button.addEventListener("click", calc);
+        // button.addEventListener("click", user.getFullName);
+        button.addEventListener("click", user.getFullName.bind(user));
+
+        // setTimeout(user.getFullName, 3000);
+        // setTimeout(user.getFullName.bind(user), 3000);
+        // setTimeout(callback, timeout)
+        // setTimeout(function(){
+        //     console.log(this);
+        //     user.getFullName();
+        // }, 3000);
+    </script>
+</body>
+</html>
